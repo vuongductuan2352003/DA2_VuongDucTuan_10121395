@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aFeU/NeW28prcGvquF858JOYIMsklSTBILLmtooAtW7Uagaf2XTn4hPXQV+FkSeSzhjZFZSdmO6mrNnhGeVupQ==",
+  "dgSpecHash": "p/GVMTe+GFdl14g42whUN27zUNS/63iMRlseOq9EayAP0ecaE4OP31smg7O1Ob4EQWasAyxNxaat9aT89KQ5hQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
+  "projectFilePath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vuong\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\vuong\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",

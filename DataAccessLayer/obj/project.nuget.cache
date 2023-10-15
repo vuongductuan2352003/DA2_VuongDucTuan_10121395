@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z7dNgMCUCXoCrLmQJ4PWpG+LNdgFBXk5xZzGYWehHsCW4QgTXyPuxp54yTaGOd+ZGaPC7QUDaztGzF962zbw2A==",
+  "dgSpecHash": "0NnDwhI7Uq0sPJhIs3RTswpUGTMNz2hW0j1btQuQmF2fArxHIMXiVuquKxGM4dcjCcg20S1c8WqUvcKN6zHNFQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataAccessLayer\\DataAccessLayer.csproj",
+  "projectFilePath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataAccessLayer\\DataAccessLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vuong\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",
     "C:\\Users\\vuong\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\BusinessLogicLayer\\BusinessLogicLayer.csproj": {}
+    "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\BusinessLogicLayer\\BusinessLogicLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\BusinessLogicLayer\\BusinessLogicLayer.csproj": {
+    "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\BusinessLogicLayer\\BusinessLogicLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
+        "projectUniqueName": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
         "projectName": "BusinessLogicLayer",
-        "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
+        "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
         "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\BusinessLogicLayer\\obj\\",
+        "outputPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\BusinessLogicLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataAccessLayer\\DataAccessLayer.csproj"
               },
-              "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataModel\\DataModel.csproj": {
-                "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataModel\\DataModel.csproj"
+              "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataModel\\DataModel.csproj": {
+                "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataModel\\DataModel.csproj"
               }
             }
           }
@@ -72,14 +72,14 @@
         }
       }
     },
-    "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataAccessLayer\\DataAccessLayer.csproj",
         "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataAccessLayer\\obj\\",
+        "outputPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -96,8 +96,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataModel\\DataModel.csproj": {
-                "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataModel\\DataModel.csproj"
+              "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataModel\\DataModel.csproj": {
+                "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataModel\\DataModel.csproj"
               }
             }
           }
@@ -145,14 +145,14 @@
         }
       }
     },
-    "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataModel\\DataModel.csproj": {
+    "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataModel\\DataModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataModel\\DataModel.csproj",
+        "projectUniqueName": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataModel\\DataModel.csproj",
         "projectName": "DataModel",
-        "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataModel\\DataModel.csproj",
+        "projectPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataModel\\DataModel.csproj",
         "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\DataModel\\obj\\",
+        "outputPath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\DataModel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",

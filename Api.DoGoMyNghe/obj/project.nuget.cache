@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3ml6TKISzVnxDXR7vpn9nUwd50arZ5q3x0oUpgF/IXPSMDAXD0qH4rJieYqwogWkLwYxTJv5wqHqeVKnw/SJ3w==",
+  "dgSpecHash": "T2/HUpZaUc8cQb07HnLCHzBGrcWe+Dffqb3PxtsYB/Xv3U53ayauzt+dk257mN/Yy98Qd2jFjrlYlqj3lbzyEg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\BanHang\\Api.BanHang\\Api.DoGoMyNghe.csproj",
+  "projectFilePath": "C:\\Users\\vuong\\OneDrive\\Tài liệu\\WEB_DoGoMyNghe\\Api.BanHang\\Api.DoGoMyNghe.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vuong\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.22\\microsoft.aspnetcore.authentication.jwtbearer.6.0.22.nupkg.sha512",
     "C:\\Users\\vuong\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
