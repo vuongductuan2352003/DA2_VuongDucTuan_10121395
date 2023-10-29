@@ -1,0 +1,168 @@
+body{
+    background-image: url("https://dogolegia.vn/wp-content/uploads/2022/09/cabinet-tv-modern-living-room-with-armchair-lamp-table-flower-plant-concrete-wall-background-3d-rendering_41470-3786.jpg");
+   background-size: 1370px 660px;
+   
+}
+#login{
+    width: 360px;
+    height: 500px;
+    background-color: aliceblue;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+   
+}
+a{
+    text-decoration: none;
+}
+#logo{
+  
+    width: 150px;
+    height: auto;
+    margin: 60px 100px;
+}
+#logo img{
+    width: 150px;
+    height: auto;
+}
+
+#login-1{
+    display: block;
+    margin-top:-60px;
+    margin-left: 10px;
+  
+}
+
+ .background-lg-sg{
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+   color: #7B746D;
+ 
+ }
+.email {
+    background: white;
+    box-shadow: 0 0 2em #e6e9f9;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    border-radius: 20px;
+    color: #4d4d4d;
+    width: 300px;
+    margin-bottom: 20px;
+    border: solid;
+  }
+   .email input {
+    outline: none;
+    border: none;
+  }
+  .email input::-moz-placeholder {
+    color: black;
+    font-size: 0.9em;
+  }
+  .email input:-ms-input-placeholder {
+    color: black;
+    font-size: 0.9em;
+  }
+ .email input::placeholder {
+    color: black;
+    font-size: 0.9em;
+  }
+  .email ion-icon {
+    color: #4d4d4d;
+    margin-bottom: -0.2em;
+  }
+  .password {
+    background: white;
+    box-shadow: 0 0 2em #e6e9f9;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    border-radius: 20px;
+    color: #4d4d4d;
+    border: solid;
+    width: 300px;
+  }
+   .password input {
+    outline: none;
+    border: none;
+  }
+ .password input::-moz-placeholder {
+    color: black;
+    font-size: 0.9em;
+  }
+.password input:-ms-input-placeholder {
+    color: black;
+    font-size: 0.9em;
+  }
+ .password input::placeholder {
+    color: black;
+    font-size: 0.9em;
+  }
+  .password ion-icon {
+    color: #4d4d4d;
+    margin-bottom: -0.2em;
+  }
+ .password .show-hide {
+    margin-right: -5em;
+  }
+ .login {
+    padding: 1em;
+    background: #3e4684;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-left: 130px;
+  }
+  .footer {
+    display: flex;
+    font-size: 0.7em;
+    color: #5e5e5e;
+    gap: 14em;
+    padding-bottom: 10em;
+  }
+  .footer span {
+    cursor: pointer;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  .Signup {
+    padding: 1em;
+    background: #3e4684;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-top: 20px;
+
+  }
+#login-signup{
+   
+ width: 500px;
+
+ float: left;
+   margin:-60px 70px;
+   cursor: pointer;
+   
+}
+#signup-3{
+    display: none;
+}
+.signup {
+    padding: 1em;
+    background: #3e4684;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-left: 130px;
+  }

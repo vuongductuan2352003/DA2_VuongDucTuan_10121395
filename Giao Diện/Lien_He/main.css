@@ -1,0 +1,55 @@
+#main{
+
+   position: relative;
+   width: 100%;
+   height: 761px; 
+}
+#main img{
+    width: 100%;
+    height: 761px;
+}
+#background-LH{
+    background: rgba(255, 255, 255, 0.581);
+    top: 0;
+   position: absolute;
+   width: 100%;
+   height: 761px;
+   font-family: "Quicksand", sans-serif;
+}
+
+#mapss{
+    float: left;
+
+    width: 650px;
+    height: 464px;
+
+}
+#mapsss{
+    margin: 30px 20px;
+}
+.border{
+    margin: 0px 20px;
+    border: 2px solid #8d0000;
+    width: 600px;
+    height: 35px;
+}
+.GLH{
+    width: 136px;
+    height: 44px;
+    margin-left: 20px;
+    background-color: #5A4137;
+    color: white;
+    border: 0;
+}
+#form{
+   
+    width: 670px;
+    height: 550px;
+
+    float: left;
+}#LHTVTK{
+  
+    margin-top: 80px;
+    width: 100%;
+    height: 120px;
+}

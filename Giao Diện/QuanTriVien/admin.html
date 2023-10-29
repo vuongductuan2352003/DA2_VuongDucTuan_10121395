@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="/Trang_Chủ/main.css">
+
+    <title>Document</title>
+</head>
+
+<body ng-app="APIDOGOMYNGHE" ng-controller="SP">
+    <header id="header">
+        <div class="h" id="DVCLG">
+            <h3>
+                <span class="hh">ĐỒ GỖ LÊ GIA - ADMIN</span>
+            </h3>
+            <h3><span class="hhh">ĐỒ GỖ LÊ GIA - ADMIN</span></h3>
+        </div>
+    </header>
+    <main>
+        <section id="menu-admin">
+            <ul>
+                <li >Trang Chủ</li>
+                <li > Sản phẩm</li>
+                <li>Đơn Hàng</li>
+                <li>Khách Hàng</li>
+                <li>Nhà phân phối</li>
+            </ul>
+        </section>
+        <section id="SANPHAM-ADMIN">
+            <div class="menu-sanpham" >
+                <table>
+                    <tr>
+                        <!-- Theo độ rộng của table content -->
+                        <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('stt')">STT<i class="fa fa-sort"></i></th>
+                        <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('masp')">Mã Sản Phẩm <i class="fa fa-sort"></i></th>
+                        <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('masp')">Mã Danh Mục<i class="fa fa-sort"></i></th>
+                        <th title="Sắp xếp" style="width: 40%" onclick="sortProductsTable('ten')">Tên <i class="fa fa-sort"></i></th>
+                        <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('gia')">Giá <i class="fa fa-sort"></i></th>
+                        <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('khuyenmai')">Nhà Sản Xuất<i class="fa fa-sort"></i></th>
+                        <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('khuyenmai')">Bảo Hành<i class="fa fa-sort"></i></th>
+        
+                        <th style="width: 15%">Hành động</th>
+                    </tr>
+                    <tr ng-repeat="sp in ListSP">
+                        <th title="Sắp xếp" style="width: 5%" >{{$index + 1}}</th>
+                        <th title="Sắp xếp" style="width: 5%" >{{sp.maSanPham}}</th>
+                        <th title="Sắp xếp" style="width: 5%"> {{sp.maDanhMuc}}</th>
+                        <th title="Sắp xếp" style="width: 15%" >{{sp.tenSanPham}}</th>
+                        <th title="Sắp xếp" style="width: 10%" >{{sp.gia | number:'0'}}đ</th>
+                        <th title="Sắp xếp" style="width: 5%" >{{sp.nhaSanXuat}}</th>
+                        <th title="Sắp xếp" style="width: 5%" >{{sp.baoHanh}}</th>
+                        <th style="width: 15%">Hành động</th>
+                    </tr>
+                </table>
+              </div>
+              
+
+            </div>
+            
+              
+
+        </section>
+    </main>
+    <footer></footer>
+    
+    <script src="/Connection/Angular.min.js"></script>
+    <script src="/Connection/Global.js"></script>
+    <script src="/Connection/Jquery-3.6.0.min.js"></script>
+    <script src="/Connection/SanPham.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
