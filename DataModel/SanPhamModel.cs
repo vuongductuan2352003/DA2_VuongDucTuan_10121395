@@ -13,7 +13,10 @@ namespace DataModel
         public string TenSanPham { get; set; }
         public string AnhDaiDien { get; set; }        
         public decimal Gia { get; set; }
-        public List<SanPhamModel> list_json_sanphamlienquan { get; set; }
+
+        public string NhaSanXuat { get; set; }
+
+        public string BaoHanh { get; set; }
     }
      
 }

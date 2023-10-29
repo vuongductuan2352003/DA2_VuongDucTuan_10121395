@@ -26,16 +26,20 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
-        public bool Create(HoaDonModel model)
+        public bool Create(SanPhamModel model)
         {
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_hoadon_create",
-                "@TenKH", model.TenKH,
-                "@Diachi", model.Diachi,
-                "@TrangThai", model.TrangThai,
-                "@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "THEM_SAN_PHAM",
+                "@MaSanPham", model.MaSanPham,
+                "@MaDanhMuc", model.MaDanhMuc,
+                "@TenSanPham", model.TenSanPham,
+                "@AnhDaiDien", model.AnhDaiDien,
+                "@Gia", model.Gia,
+                "@NhaSanXuat", model.NhaSanXuat,
+                 "@BaoHanh", model.BaoHanh);
+
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
@@ -47,17 +51,20 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
-        public bool Update(HoaDonModel model)
+        public bool Update(SanPhamModel model)
         {
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_hoa_don_update",
-                "@MaHoaDon", model.MaHoaDon,
-                "@TenKH", model.TenKH,
-                "@Diachi", model.Diachi,
-                "@TrangThai", model.TrangThai,
-                "@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "CAP_NHAT_SAN_PHAM",
+                "@MaSanPham", model.MaSanPham,
+                "@MaDanhMuc", model.MaDanhMuc,
+                "@TenSanPham", model.TenSanPham,
+                "@AnhDaiDien", model.AnhDaiDien,
+                "@Gia", model.Gia,
+                "@NhaSanXuat", model.NhaSanXuat,
+                 "@BaoHanh", model.BaoHanh) ;
+                  
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
@@ -87,6 +94,23 @@ namespace DataAccessLayer
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
                 return dt.ConvertTo<ThongKeKhachModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<SanPhamModel> GetDanhSachSanPham()
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "GetDanhSachSanPham");
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+
+                List<SanPhamModel> sanPhamList = dt.ConvertTo<SanPhamModel>().ToList();
+                return sanPhamList.ToList();
             }
             catch (Exception ex)
             {

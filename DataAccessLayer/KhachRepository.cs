@@ -92,5 +92,22 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
+        public List<KhachModel> GetDanhSachKhachHang()
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "GetDanhSachKhachHang");
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+
+                List<KhachModel> KhachHangList = dt.ConvertTo<KhachModel>().ToList();
+                return KhachHangList.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

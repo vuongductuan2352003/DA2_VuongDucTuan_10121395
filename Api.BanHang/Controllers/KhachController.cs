@@ -131,7 +131,14 @@ namespace Api.BanHang.Controllers
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } 
+            }
+            
+        }
+        [Route("get-listKhachHang")]
+        [HttpGet]
+        public List<KhachModel> GetDanhSachKhachHang()
+        {
+            return _khachBusiness.GetDanhSachKhachHang();
         }
     }
 }

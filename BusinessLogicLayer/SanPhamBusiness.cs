@@ -15,6 +15,18 @@ namespace BusinessLogicLayer
         public SanPhamModel GetChiTietSanPham(int id)
         {
             return _res.GetChiTietSanPham(id);
-        } 
+        }
+      public  bool Create(SanPhamModel model)
+        {
+            return _res.Create(model);
+        }
+        public bool Update(SanPhamModel model)
+        {
+            return _res.Update(model);
+        }
+        public List<SanPhamModel> GetDanhSachSanPham()
+        {
+            return _res.GetDanhSachSanPham();
+        }
     }
 }
