@@ -20,6 +20,13 @@ namespace Api.BanHang.Controllers
         {
             return _sanPhamBusiness.GetChiTietSanPham(id);
         }
+        [Route("create-khachh")]
+        [HttpPost]
+        public ChiTietSanPhamModel CreateItem([FromBody] ChiTietSanPhamModel model)
+        {
+            _sanPhamBusiness.Create(model);
+            return model;
+        }
         [Route("create-khach")]
         [HttpPost]
         public SanPhamModel CreateItem([FromBody] SanPhamModel model)

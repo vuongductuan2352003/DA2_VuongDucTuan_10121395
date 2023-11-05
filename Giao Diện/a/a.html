@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h2>Product List</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Manufacturer</th>
+            <th>Unit</th>
+            <th>Category</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="sanpham in listSanPham">
+            <td>{{sanpham.MaSanPham}}</td>
+            <td>{{sanpham.TenSanPham}}</td>
+            <td>{{sanpham.MoTaSanPham}}</td>
+            <td>{{sanpham.MaNhaSanXuat}}</td>
+            <td>{{sanpham.MaDonViTinh}}</td>
+            <td>{{sanpham.MaDanhMuc}}</td>
+            <td>{{sanpham.AnhDaiDien}}</td>
+            <td>
+                <button ng-click="Sua(sanpham.MaSanPham)">Edit</button>
+                <button ng-click="Xoa(sanpham.MaSanPham)">Delete</button>
+            </td>
+        </tr>
+    </table>
+    <form>
+        <label for="MaSanPham">Product ID:</label>
+        <input type="text" ng-model="MaSanPham"><br>
+
+        <label for="TenSanPham">Product Name:</label>
+        <input type="text" ng-model="TenSanPham"><br>
+
+        <label for="MoTaSanPham">Product Description:</label>
+        <textarea ng-model="MoTaSanPham"></textarea><br>
+
+        <label for="MaNhaSanXuat">Manufacturer:</label>
+        <select ng-model="MaNhaSanXuat">
+            <option ng-repeat="nhaSanXuat in listNhaSanXuat" value="{{nhaSanXuat.Ma}}">{{nhaSanXuat.Ten}}</option>
+        </select><br>
+
+        <label for="MaDonViTinh">Unit:</label>
+        <select ng-model="MaDonViTinh">
+            <option ng-repeat="donViTinh in listDonViTinh" value="{{donViTinh.Ma}}">{{donViTinh.Ten}}</option>
+        </select><br>
+
+        <label for="MaDanhMuc">Category:</label>
+        <select ng-model="MaDanhMuc">
+            <option ng-repeat="danhMuc in listDanhMuc" value="{{danhMuc.Ma}}">{{danhMuc.Ten}}</option>
+        </select><br>
+
+        <button ng-click="AddNewProduct()">Add Product</button>
+    </form>
+</body>
+</html>

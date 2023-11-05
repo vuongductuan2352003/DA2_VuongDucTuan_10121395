@@ -26,20 +26,17 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
-        public bool Create(SanPhamModel model)
+
+        public bool Create(ChiTietSanPhamModel model)
         {
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "THEM_SAN_PHAM",
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "THEM",
+                "@MaChiTietDanhMuc", model.MaChiTietDanhMuc,
                 "@MaSanPham", model.MaSanPham,
-                "@MaDanhMuc", model.MaDanhMuc,
-                "@TenSanPham", model.TenSanPham,
-                "@AnhDaiDien", model.AnhDaiDien,
-                "@Gia", model.Gia,
-                "@NhaSanXuat", model.NhaSanXuat,
-                 "@BaoHanh", model.BaoHanh);
-
+                "@SoLuong", model.SoLuong,
+                "@MoTa", model.MoTa);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
@@ -51,6 +48,34 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
+        public bool Create(SanPhamModel model)
+        {
+            string msgError = "";
+            try
+            {
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "THEM_SAN_PHAM",
+              
+                "@MaDanhMuc", model.MaDanhMuc,
+                "@TenSanPham", model.TenSanPham,
+                "@AnhDaiDien", model.AnhDaiDien,
+                "@Gia", model.Gia,
+                "@NhaSanXuat", model.NhaSanXuat,
+                 "@BaoHanh", model.BaoHanh,
+              
+                "@list_json_chitietsanpham", model.list_json_chitietsanpham != null ? MessageConvert.SerializeObject(model.list_json_chitietsanpham) : null);
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(Convert.ToString(result) + msgError);
+                }
+              
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+      
         public bool Update(SanPhamModel model)
         {
             string msgError = "";

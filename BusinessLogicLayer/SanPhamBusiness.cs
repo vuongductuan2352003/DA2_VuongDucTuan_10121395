@@ -16,7 +16,11 @@ namespace BusinessLogicLayer
         {
             return _res.GetChiTietSanPham(id);
         }
-      public  bool Create(SanPhamModel model)
+        public bool Create(ChiTietSanPhamModel model)
+        {
+            return _res.Create(model);
+        }
+        public  bool Create(SanPhamModel model)
         {
             return _res.Create(model);
         }

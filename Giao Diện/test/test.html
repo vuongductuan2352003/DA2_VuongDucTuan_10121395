@@ -10,155 +10,124 @@
 </head>
 <body ng-app="APIDOGOMYNGHE" ng-controller ="SP">
  
-    <div class="sanpham">
-        <table class="table-header">
-            <tr>
-                <!-- Theo độ rộng của table content -->
-                <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('stt')">STT<i class="fa fa-sort"></i></th>
-                <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('masp')">Mã Sản Phẩm <i class="fa fa-sort"></i></th>
-                <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('masp')">Mã Danh Mục<i class="fa fa-sort"></i></th>
-                <th title="Sắp xếp" style="width: 40%" onclick="sortProductsTable('ten')">Tên <i class="fa fa-sort"></i></th>
-                <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('gia')">Giá <i class="fa fa-sort"></i></th>
-                <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('khuyenmai')">Nhà Sản Xuất<i class="fa fa-sort"></i></th>
-                <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('khuyenmai')">Bảo Hành<i class="fa fa-sort"></i></th>
+    <table class="overlayTable table-outline table-content table-header">
+        <tbody><tr>
+            <th colspan="2">Thêm Sản Phẩm</th>
+        </tr>
+        <tr>
+            <td>Mã sản phẩm:</td>
+            <td><input type="text" id="maspThem"></td>
+        </tr>
+        <tr>
+            <td>Tên sản phẩm:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Hãng:</td>
+            <td>
+                <select name="chonCompany" onchange="autoMaSanPham(this.value)">
+                    <script>
+                        var company = ["Apple", "Samsung", "Oppo", "Nokia", "Huawei", "Xiaomi","Realme", "Vivo", "Philips", "Mobell", "Mobiistar", "Itel","Coolpad", "HTC", "Motorola"];
+                        for(var c of company) {
+                            document.writeln(`<option value="`+c+`">`+c+`</option>`);
+                        }
+                    </script><option value="Apple">Apple</option>
+<option value="Samsung">Samsung</option>
+<option value="Oppo">Oppo</option>
+<option value="Nokia">Nokia</option>
+<option value="Huawei">Huawei</option>
+<option value="Xiaomi">Xiaomi</option>
+<option value="Realme">Realme</option>
+<option value="Vivo">Vivo</option>
+<option value="Philips">Philips</option>
+<option value="Mobell">Mobell</option>
+<option value="Mobiistar">Mobiistar</option>
+<option value="Itel">Itel</option>
+<option value="Coolpad">Coolpad</option>
+<option value="HTC">HTC</option>
+<option value="Motorola">Motorola</option>
 
-                <th style="width: 15%">Hành động</th>
-            </tr>
-            <tr ng-repeat="sp in ListSP">
-                <th title="Sắp xếp" style="width: 5%" >{{$index + 1}}</th>
-                <th title="Sắp xếp" style="width: 5%" >{{sp.maSanPham}}</th>
-                <th title="Sắp xếp" style="width: 5%"> {{sp.maDanhMuc}}</th>
-                <th title="Sắp xếp" style="width: 15%" >{{sp.tenSanPham}}</th>
-                <th title="Sắp xếp" style="width: 10%" >{{sp.gia | number:'0'}}đ</th>
-                <th title="Sắp xếp" style="width: 5%" >{{sp.nhaSanXuat}}</th>
-                <th title="Sắp xếp" style="width: 5%" >{{sp.baoHanh}}</th>
-                <th style="width: 15%">Hành động</th>
-            </tr>
-        </table>
-        
-        <div class="table-content">
-        </div>
-
-        <div class="table-footer">
-            <select name="kieuTimSanPham">
-                <option value="ma">Tìm theo mã</option>
-                <option value="ten">Tìm theo tên</option>
-            </select>
-            <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemSanPham(this)">
-            <button onclick="document.getElementById('khungThemSanPham').style.transform = 'scale(1)'; autoMaSanPham()">
-                <i class="fa fa-plus-square"></i>
-                Thêm sản phẩm
-            </button>
-        </div>
-
-        <div id="khungThemSanPham" class="overlay">
-            <span class="close" onclick="this.parentElement.style.transform = 'scale(0)';">&times;</span>
-            <table class="overlayTable table-outline table-content table-header">
-                <tr>
-                    <th colspan="2">Thêm Sản Phẩm</th>
-                </tr>
-                <tr>
-                    <td>Mã sản phẩm:</td>
-                    <td><input type="text" id="maspThem"></td>
-                </tr>
-                <tr>
-                    <td>Tên sản phẩm:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Hãng:</td>
-                    <td>
-                        <select name="chonCompany" onchange="autoMaSanPham(this.value)">
-                            <script>
-                                var company = ["Apple", "Samsung", "Oppo", "Nokia", "Huawei", "Xiaomi","Realme", "Vivo", "Philips", "Mobell", "Mobiistar", "Itel","Coolpad", "HTC", "Motorola"];
-                                for(var c of company) {
-                                    document.writeln(`<option value="`+c+`">`+c+`</option>`);
-                                }
-                            </script>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Hình:</td>
-                    <td>
-                        <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" src="">
-                        <input type="file" accept="image/*" onchange="capNhatAnhSanPham(this.files, 'anhDaiDienSanPhamThem')">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Giá tiền:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Số sao (số nguyên 0->5):</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Đánh giá (số nguyên):</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Khuyến mãi:</td>
-                    <td>
-                        <select>
-                            <option value="">Không</option>
-                            <option value="tragop">Trả góp</option>
-                            <option value="giamgia">Giảm giá</option>
-                            <option value="giareonline">Giá rẻ online</option>
-                            <option value="moiramat">Mới ra mắt</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Giá trị khuyến mãi:</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <th colspan="2">Thông số kĩ thuật</th>
-                </tr>
-                <tr>
-                    <td>Màn hình:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Hệ điều hành:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Camara sau:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Camara trước:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>CPU:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>RAM:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Bộ nhớ trong:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Thẻ nhớ:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td>Dung lượng Pin:</td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="table-footer"> <button onclick="themSanPham()">THÊM</button> </td>
-                </tr>
-            </table>
-        </div>
-        <div id="khungSuaSanPham" class="overlay"></div>
-    </div> <!-- // sanpham -->
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Hình:</td>
+            <td>
+                <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" src="">
+                <input type="file" accept="image/*" onchange="capNhatAnhSanPham(this.files, 'anhDaiDienSanPhamThem')">
+            </td>
+        </tr>
+        <tr>
+            <td>Giá tiền:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Số sao (số nguyên 0-&gt;5):</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Đánh giá (số nguyên):</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Khuyến mãi:</td>
+            <td>
+                <select>
+                    <option value="">Không</option>
+                    <option value="tragop">Trả góp</option>
+                    <option value="giamgia">Giảm giá</option>
+                    <option value="giareonline">Giá rẻ online</option>
+                    <option value="moiramat">Mới ra mắt</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Giá trị khuyến mãi:</td>
+            <td><input type="text" placeholder=""></td>
+        </tr>
+        <tr>
+            <th colspan="2">Thông số kĩ thuật</th>
+        </tr>
+        <tr>
+            <td>Màn hình:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Hệ điều hành:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Camara sau:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Camara trước:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>CPU:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>RAM:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Bộ nhớ trong:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Thẻ nhớ:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Dung lượng Pin:</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="table-footer"> <button onclick="themSanPham()">THÊM</button> </td>
+        </tr>
+    </tbody></table>
 
 
     <script src="/Connection/Angular.min.js"></script>

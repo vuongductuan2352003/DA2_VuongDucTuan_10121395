@@ -13,6 +13,7 @@ namespace BusinessLogicLayer
         List<SanPhamModel> GetDanhSachSanPham();
         bool Create(SanPhamModel model);
         public bool Update(SanPhamModel model);
+        public bool Create(ChiTietSanPhamModel model);
 
     }
 }
