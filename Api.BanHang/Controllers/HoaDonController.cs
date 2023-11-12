@@ -3,7 +3,7 @@ using DataModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.BanHang.Controllers
+namespace Api.DoGoMyNghe.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

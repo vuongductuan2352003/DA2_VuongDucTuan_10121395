@@ -12,7 +12,7 @@
     <title>Document</title>
 </head>
 
-<body ng-app="APIDOGOMYNGHE" ng-controller="SP">
+<body ng-app="APIDOGOMYNGHE" ng-controller="SP" >
     <header id="header">
         <div class="h" id="DVCLG">
             <h3>
@@ -54,7 +54,7 @@
    
                 <table>
                     
-                    <tr ng-repeat="sp in ListSP">
+                    <tr ng-repeat="sp in ListSP"  >
                         <th  style="width: 5%" >{{$index + 1}}</th>
                         <th  style="width: 5%" >{{sp.maSanPham}}</th>
                         <th  style="width: 5%"> {{sp.maDanhMuc}}</th>
@@ -63,6 +63,7 @@
                         </th>
                         <th  style="width: 10%" >{{sp.gia | number:'0'}}đ</th>
                         <th  style="width: 5%" >{{sp.nhaSanXuat}}</th>
+               
                         <th  style="width: 5%" >{{sp.baoHanh}}</th>
                         <th style="width: 15%">  <div>
                       <button> <i class="fa-solid fa-plus"></i> </button>   
@@ -85,10 +86,7 @@
                     <option value="ma">Thứ tự theo giá từ thấp đến cao</option>  
                     <option value="ma">Thứ tự theo giá từ cao đến thấp</option>  
                     
-                </select>
-                
-              
-      
+                </select>                                 
          </div>
             </div>
             
@@ -102,7 +100,9 @@
     <script src="/Connection/Angular.min.js"></script>
     <script src="/Connection/Global.js"></script>
     <script src="/Connection/Jquery-3.6.0.min.js"></script>
+    <script src="/Connection/KB.js"></script>
     <script src="/Connection/SanPham.js"></script>
+   
     <script src="admin.js"></script>
 </body>
 

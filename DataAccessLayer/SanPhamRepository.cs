@@ -61,7 +61,7 @@ namespace DataAccessLayer
                 "@Gia", model.Gia,
                 "@NhaSanXuat", model.NhaSanXuat,
                  "@BaoHanh", model.BaoHanh,
-              
+
                 "@list_json_chitietsanpham", model.list_json_chitietsanpham != null ? MessageConvert.SerializeObject(model.list_json_chitietsanpham) : null);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {

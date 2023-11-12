@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Api.BanHang.Controllers
+namespace Api.DoGoMyNghe.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

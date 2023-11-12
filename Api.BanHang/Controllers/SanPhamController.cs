@@ -3,7 +3,7 @@ using DataModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.BanHang.Controllers
+namespace Api.DoGoMyNghe.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,9 +27,9 @@ namespace Api.BanHang.Controllers
             _sanPhamBusiness.Create(model);
             return model;
         }
-        [Route("create-khach")]
+        [Route("create-sp")]
         [HttpPost]
-        public SanPhamModel CreateItem([FromBody] SanPhamModel model)
+        public SanPhamModel CreateItem(SanPhamModel model)
         {
             _sanPhamBusiness.Create(model);
             return model;

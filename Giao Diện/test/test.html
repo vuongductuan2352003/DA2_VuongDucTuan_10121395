@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,19 +9,111 @@
     <link rel="stylesheet" href="/test/test.css">
 
 </head>
-<body ng-app="APIDOGOMYNGHE" ng-controller ="SP">
- 
-    <table class="overlayTable table-outline table-content table-header">
+
+<body ng-app="APIDOGOMYNGHE">
+
+    <table ng-controller="SP">
+        <tbody>
+            <tr>
+                <th colspan="2">Thêm Sản Phẩm</th>
+            </tr>
+            <tr>
+                <td for="MaDanhMuc">Category:</td>
+                <td>
+                    <select ng-controller="DM" ng-model="maDanhMuc">
+                        <option ng-repeat="dm in ListDM" value="">{{dm.tenDanhMuc}}</option>
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Tên sản phẩm:</td>
+                <td><input type="text" ng-model="tenSanPham"></td>
+            </tr>
+            <tr>
+                <td>Ảnh Đại Diện:</td>
+                <td>
+                    <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" ng-src="{{anhDaiDien}}">
+                    <input type="file" accept="image/*" ng-model="anhDaiDien"
+                        onchange="capNhatAnhSanPham(this.files, 'anhDaiDienSanPhamThem')">
+                </td>
+            </tr>
+            <tr>
+                <td>Giá tiền:</td>
+                <td><input type="number" ng-model="gia"></td>
+            </tr>
+            <tr>
+                <td>Hãng:</td>
+                <td><input type="text" ng-model="nhaSanXuat"></td>
+            </tr>
+            <tr>
+                <th colspan="2">Thêm chi tiết Sản Phẩm</th>
+            </tr>
+            <tr>
+                <td>Mã chi tiết danh mục</td>
+                <td></td>
+            </tr>
+            <tr>
+          
+            </tr>
+            <tr ng-controller="DM">
+                <td>Mã danh mục</td>
+                <td>
+                    <select ng-model="maDanhMuc">
+                        <option value="" disabled selected>Chọn mã danh mục</option>
+                        <option ng-repeat="dm in ListDM" value="{{dm.maDanhMuc}}">{{dm.maDanhMuc}}</option>
+                    </select>
+                </td>
+            </tr>
+            
+            <tr ng-controller="DM">
+                <td>Mã chi tiết danh mục</td>
+                <td ng-show="showChiTiet">
+                    <select ng-model="maChiTietDanhMuc">
+                        <option value="" disabled selected>Chọn mã chi tiết danh mục</option>
+                        <option ng-repeat="ctdm in ChiTietDanhMucList" >{{ctdm.maChiTietDanhMuc}}</option>
+                    </select>
+                </td>
+            </tr>
+            
+            
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+
+    <!-- 
+
+    <table class="overlayTable table-outline table-content table-header"> 
         <tbody><tr>
             <th colspan="2">Thêm Sản Phẩm</th>
         </tr>
         <tr>
             <td>Mã sản phẩm:</td>
-            <td><input type="text" id="maspThem"></td>
+            <td><input type="text" ng-model="maSanPham"></td>
+        </tr>
+        <tr>
+            <select ng-model="DanhMuc">
+                <option ng-repeat="DanhMuc in ListDM" value="{{DanhMuc.maDanhMuc}}">{{DanhMuc.tenDanhMuc}}</option>
+            </select><br>
         </tr>
         <tr>
             <td>Tên sản phẩm:</td>
-            <td><input type="text"></td>
+            <td><input type="text"  ng-model="tenSanPham"></td>
+        </tr>
+        <tr>
+            <td>Hình:</td>
+            <td>
+                <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" src="">
+                <input type="file" accept="image/*" value="" ng-model="anhDaiDien">
+            </td>
         </tr>
         <tr>
             <td>Hãng:</td>
@@ -128,12 +221,62 @@
             <td colspan="2" class="table-footer"> <button onclick="themSanPham()">THÊM</button> </td>
         </tr>
     </tbody></table>
+    <h1>
+        <option ng-repeat="sp in ListSP" >{{sp.tenSanPham}} FEF</option>
+        <option ng-repeat="DanhMuc in ListDM" value="{{DanhMuc.maDanhMuc}}">{{DanhMuc.tenDanhMuc}}</option>
+    </h1>
+    <h1 ng-repeat="sp in ListSP" >{{sp.tenSanPham}}
 
-
+    </h1> 
+    <!DOCTYPE html>
+    <html ng-app="AppBanHang">
+    <head>
+        <title>Add New Product</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-app="APIDOGOMYNGHE" ng-controller ="DM" ng-controller ="SP">
+        <h1>Add New Product</h1>
+   
+        <form>
+            <label for="MaSanPham">Product ID:</label>
+            <input type="text" ng-model="MaSanPham"><br>
+    
+            <label for="TenSanPham">Product Name:</label>
+            <input type="text" ng-model="TenSanPham"><br>
+    
+            <label for="MoTaSanPham">Product Description:</label>
+            <textarea ng-model="MoTaSanPham"></textarea><br>
+    
+            <label for="MaNhaSanXuat">Manufacturer:</label>
+            <select ng-model="DanhMuc">
+                <option ng-repeat="DanhMuc in ListDM" value="{{DanhMuc.maDanhMuc}}">{{DanhMuc.tenDanhMuc}}</option>
+            </select><br>
+    
+            <label for="MaDonViTinh">Unit:</label>
+            <select ng-model="MaDonViTinh">
+                <option ng-repeat="donViTinh in listDonViTinh" value="{{donViTinh.Ma}}">{{donViTinh.Ten}}</option>
+            </select><br>
+    
+            <label for="MaDanhMuc">Category:</label>
+            <select ng-model="MaDanhMuc">
+                <option ng-repeat="danhMuc in listDanhMuc" value="{{danhMuc.Ma}}">{{danhMuc.Ten}}</option>
+            </select><br>
+    
+            <button ng-click="AddNewProduct()">Add Product</button>
+        </form>
+    
+    </body>
+    </html> 
+     -->
     <script src="/Connection/Angular.min.js"></script>
     <script src="/Connection/Global.js"></script>
     <script src="/Connection/Jquery-3.6.0.min.js"></script>
+
+    <script src="/Connection/KB.js"></script>
+    <script src="/Connection/DanhMuc.js"></script>
     <script src="/Connection/SanPham.js"></script>
+
     <script src="test.js"></script>
 </body>
+
 </html>

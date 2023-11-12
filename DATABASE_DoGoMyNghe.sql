@@ -149,9 +149,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ChiTietSanPham](
 	[MaChiTietSanPham] [int] IDENTITY(1,1) NOT NULL,
-	[MaChiTietDanhMuc] [int] Null,
+	[MaChiTietDanhMuc] [int]  Null,
 	[MaSanPham] [int] NULL,
-	[SoLuong] [int] NULL,
+	[SoLuong] [int]  NULL,
 	[MoTa] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_DetailProducts] PRIMARY KEY CLUSTERED 
 (
@@ -327,6 +327,31 @@ VALUES
 (N'Phạm Văn Công', N'Nam', N'Nghệ An', '0123456789', 'phamvancong@email.com'),
 (N'Hoàng Thị Thùy Linh', N'Nữ', N'Đắk Lắk', '0987654321', 'hoangthithuylinh@email.com');
 
+--thêm chi tiết danh mục
+-- Thêm các tên sản phẩm vào bảng "ChiTietDanhMuc" với mã danh mục 2
+INSERT INTO ChiTietDanhMuc (MaDanhMuc, TenChiTietDanhMuc) VALUES
+ (1, N'Mẫu bàn ăn đẹp'),
+ (1, N'Mẫu tủ bếp đẹp'),
+(2, N'Sofa gỗ hiện đại'),
+(2, N'Mẫu sofa da nỉ đẹp'),
+(2, N'Mẫu kệ tivi đẹp'),
+(2, N'Tủ rượu gỗ công nghiệp'),
+(2, N'Kệ gỗ trang trí đẹp'),
+(2, N'Mẫu tủ giầy đẹp'),
+(2, N'Bàn trà Nhật'),
+(2, N'Vách ngăn phòng khách đẹp'),
+(3, N'Bộ giường tủ'),
+(3, N'Mẫu giường ngủ gỗ đẹp'),
+(3, N'Mẫu giường ngủ bọc da nỉ'),
+(3, N'Mẫu tủ quần áo đẹp'),
+(3, N'Bàn phấn trang điểm'),
+ (4, N'Phòng ngủ trẻ em'),
+(4, N'Giường ngủ cho bé gái'),
+(4, N'Giường ngủ cho bé trai'),
+(4, N'Bàn học trẻ em'),
+ (5, N'Bàn làm việc'),
+(5, N'Tủ đựng tài liệu'),
+(5, N'Phụ kiện');
 
 
 
@@ -431,7 +456,7 @@ ALTER TABLE [dbo].[ChiTietDanhMuc] CHECK CONSTRAINT [FK_ChiTietDanhMuc_DanhMuc]
 GO
 -------PROC GET LIST SANPHAMS
 go
-CREATE PROCEDURE GetDanhSachSanPham
+alter PROCEDURE GetDanhSachSanPham
 AS
 BEGIN
     SELECT 
@@ -442,28 +467,94 @@ BEGIN
         [Gia],
 
 	[NhaSanXuat] ,
-	[BaoHanh] 
-     
- 
-    FROM SanPham;
+	[BaoHanh] ,
+  
+	 (
+        SELECT 
+		[MaChiTietSanPham],
+		[MaChiTietDanhMuc],
+            [MaSanPham],
+			[SoLuong],
+		[MoTa] 
+        FROM ChiTietSanPham ctsp
+        WHERE ctsp.MaSanPham = sp.MaSanPham
+        FOR JSON PATH
+    ) AS list_json_chitietsanpham
+FROM SanPham sp;
 END;
 EXEC GetDanhSachSanPham
 -- thêm sản phẩm
 go
-create PROCEDURE [dbo].[THEM_SAN_PHAM](
-@MaSanPham       int, 
+select * from ChiTietSanPham
+select * from SanPham
+drop PROCEDURE  [dbo].[THEM_SAN_PHAM]
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+alter PROCEDURE [dbo].[THEM_SAN_PHAM]
+(
  @MaDanhMuc       int, 
  @TenSanPham      NVARCHAR(150), 
  @AnhDaiDien      NVARCHAR(max),  
  @Gia [decimal](18, 0),
  @NhaSanXuat NVARCHAR(100),
- @BaoHanh    NVARCHAR(100)
+ @BaoHanh    NVARCHAR(100),
+  @list_json_chitietsanpham NVARCHAR(MAX)
 )
 AS
     BEGIN
-       insert into SanPham(MaSanPham,MaDanhMuc,TenSanPham,AnhDaiDien,Gia,NhaSanXuat,BaoHanh)
-    values(@MaSanPham,@MaDanhMuc,@TenSanPham,@AnhDaiDien,@Gia,@NhaSanXuat,@BaoHanh);
+  DECLARE @MaSanPham INT;
+        insert into SanPham(MaDanhMuc,TenSanPham,AnhDaiDien,Gia,NhaSanXuat,BaoHanh)
+    values(@MaDanhMuc,@TenSanPham,@AnhDaiDien,@Gia,@NhaSanXuat,@BaoHanh);
+
+    SET @MaSanPham = (SELECT SCOPE_IDENTITY());
+                IF(@list_json_chitietsanpham IS NOT NULL)
+                    BEGIN
+                        INSERT INTO ChiTietSanPham
+						(
+						  MaChiTietDanhMuc,
+                          MaSanPham, 
+						  SoLuong,
+                          MoTa                
+                        )
+                    SELECT 
+						JSON_VALUE(p.value, '$.maChiTietDanhMuc'),
+						@MaSanPham,
+						JSON_VALUE(p.value, '$.soLuong'),
+							JSON_VALUE(p.value, '$.moTa')
+                    FROM OPENJSON(@list_json_chitietsanpham) AS p;
+                END;
+        SELECT '';
     END;
+
+
+
+GO
+select * from  ChiTietSanPham
+-- Khai báo các biến để truyền tham số
+-- Khai báo các biến để truyền tham số
+
+DECLARE @MaDanhMuc int = 3;
+DECLARE @TenSanPham NVARCHAR(150) = N'Sản phẩm ví dụ';
+DECLARE @AnhDaiDien NVARCHAR(MAX) = N'/images/example.jpg';
+DECLARE @Gia DECIMAL(18, 0) = 500;
+DECLARE @NhaSanXuat NVARCHAR(100) = N'Nhà sản xuất ví dụ';
+DECLARE @BaoHanh NVARCHAR(100) = N'Bảo hành 1 năm';
+DECLARE @list_json_chitietsanpham NVARCHAR(MAX) = N'[{"MaChiTietDanhMuc": 13, "SoLuong": 240, "moTa": "Mô tả sản phẩm ví dụ"}]';
+
+
+-- Gọi stored procedure để thêm sản phẩm
+EXEC THEM_SAN_PHAM   @MaDanhMuc, @TenSanPham, @AnhDaiDien, @Gia, @NhaSanXuat, @BaoHanh, @list_json_chitietsanpham;
+
+-- Xem thông tin sản phẩm
+SELECT * FROM SanPham WHERE MaSanPham = SCOPE_IDENTITY();
+
+
+-- Xem thông tin sản phẩm
+SELECT * FROM SanPham WHERE MaSanPham = @MaSanPham;
 --sửa sản phẩm
 go
 CREATE PROCEDURE [dbo].[CAP_NHAT_SAN_PHAM]
@@ -525,11 +616,613 @@ EXEC [dbo].[Sap_Xep_SP] @LoaiSapXep;
 
 
 
+SELECT * FROM ChiTietSanPham
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[THEM](
+@MaChiTietDanhMuc INT,
+@MaSanPham INT,
+@SoLuong INT,
+@MoTa NVARCHAR(MAX)
+)
+AS
+SET @MaSanPham = (SELECT SCOPE_IDENTITY());
+    BEGIN
+       insert into ChiTietSanPham(MaChiTietDanhMuc,MaSanPham,SoLuong,MoTa)
+    values(@MaChiTietDanhMuc,@MaSanPham,@SoLuong,@MoTa);
+    END;
 
 
 
+go
+alter PROCEDURE GetDanhSachDanhMuc
+AS
+BEGIN
+SELECT
+    [MaDanhMuc],
+    [TenDanhMuc],
+    (
+        SELECT 
+            [MaChiTietDanhMuc],
+            [TenChiTietDanhMuc]
+        FROM ChiTietDanhMuc ctdm
+        WHERE ctdm.MaDanhMuc = dm.MaDanhMuc
+        FOR JSON PATH
+    ) AS list_json_chitietdanhmuc
+FROM DanhMuc dm;
+
+end;
+-- Gọi stored procedure để lấy danh sách danh mục và chi tiết danh mục cho một mã danh mục cụ thể
+EXEC GetDanhSachDanhMuc;
+
+----Lấy sản phẩm theo mã
+--Create Procedure GetSanPhamById
+--	@Id int
+--AS
+--BEGIN
+--	Select * from sanpham sp 
+--	Where sp.MaSanPham = @Id;
+--END
+
+--exec GetSanPhamById @Id = 15
+
+----Lấy tất cả danh sách sản phẩm
+--Create Procedure GetAllProduct
+--AS
+--BEGIN
+--	Select * from sanpham sp 
+--END
+
+----Thêm sản phẩm mới
+--Create Procedure ThemMoi
+--	@name Nvarchar(300),
+--	@maloai int,
+--	@mota nvarchar(300),
+--	@gia float,
+--	@soluong int,
+--	@anh Nvarchar(300),
+--	@motachitiet nvarchar(300)
+--AS
+--BEGIN 
+--	INSERT INTO SanPham(TenSanPham,Anh,MaLoai,GiaBan,SoLuong,MoTa,ChiTietSanPham) Values(@name,@anh,@maloai,@gia,@soluong,@mota,@motachitiet);
+--END
+
+--select *
+--from sanpham
+
+----Tìm sản phẩm tương tự theo mã loại
+--create PROC sptuongtu
+--	@id int
+--AS	
+--BEGIN
+--	select sp.*
+--	from sanpham sp inner join loaisanpham lsp on sp.MaLoai = lsp.MaLoai
+--	where lsp.MaLoai = @id
+--END
+
+--Create Procedure suasanpham
+--	@Ma int, 
+--	@name Nvarchar(300),
+--	@maloai int,
+--	@gia float,
+--	@soluong int,
+--	@mota nvarchar(300),
+--	@anh Nvarchar(300),
+--	@motachitiet nvarchar(300)
+--AS 
+--	BEGIN
+--		UPDATE SanPham
+--		SET 
+--			TenSanPham = @name,
+--			MaLoai = @maloai,
+--			MoTa = @mota,
+--			Anh = @anh,
+--			ChiTietSanPham = @motachitiet,
+--			GiaBan = @gia,
+--			SoLuong = @soluong
+--		Where @Ma = MaSanPham 
+--END
 
 
+
+--CREATE Procedure xoasanpham
+--	@Id int
+--AS
+--BEGIN
+--	DELETE SanPham
+--	where MaSanPham = @Id
+--END
+
+----Top những sản phẩm mới nhất
+--Select top(4) *
+--from SanPham 
+--order by MaSanPham desc
+
+--create procedure SanPhamMoi
+--	@sl int
+--as
+--begin 
+--	select top(@sl) *
+--	from sanpham 
+--	order by MaSanPham desc
+--end
+
+----Thực thi
+--exec SanPhamMoi @sl = 8
+
+
+----Top Sản phẩm bán chạy nhất
+--Select top(2) sum(ct.SoLuong) as[Tổng số lượng] , ct.MaSanPham ,sp.TenSanPham
+--from ChiTietHoaDonBan ct inner join SanPham sp on ct.MaSanPham = sp.MaSanPham
+--group by ct.MaSanPham,sp.TenSanPham
+--order by sum(ct.SoLuong) desc
+
+--create procedure SanPhamBanChay
+--	@sl int
+--as
+--begin 
+--	Select top(@sl) sum(ct.SoLuong) as ['số lượng'] , ct.MaSanPham ,sp.TenSanPham,sp.Anh,sp.MaLoai,sp.GiaBan,sp.SoLuong
+--	from ChiTietHoaDonBan ct inner join SanPham sp on ct.MaSanPham = sp.MaSanPham 
+--	group by ct.MaSanPham,sp.TenSanPham,sp.Anh,sp.MaLoai,sp.GiaBan,sp.SoLuong
+--	order by sum(ct.SoLuong) desc
+--end
+
+--exec SanPhamBanChay @sl = 3
+
+--exec SanPhamMoi @sl = 10
+
+----Tìm kiếm gần đúng sản phẩm theo tên và loại 
+--select sp.*
+--from SanPham sp inner join LoaiSanPham ls on sp.MaLoai = ls.MaLoai
+--where sp.TenSanPham like N'%Võ Sĩ%' or ls.TenLoai like N'%Game Team Mobie%'
+
+--CREATE PROCEDURE TimKiem
+--    @Page INT,
+--    @PageSize INT,
+--    @Search NVARCHAR(50),	
+--    @TotalCount INT = null,
+--    @FilterCount INT = null
+--AS
+--BEGIN
+--    SET NOCOUNT ON;
+
+--    DECLARE @Offset INT;
+--    DECLARE @Fetch INT;
+
+--    -- Calculate offset and fetch values
+--    SET @Offset = (@Page - 1) * @PageSize;
+--    SET @Fetch = @Page * @PageSize;
+
+--    -- Lấy tổng số lượng sản phẩm
+--    SELECT @TotalCount = COUNT(*) FROM SanPham;
+
+--    -- Nhận số lượng bản ghi được lọc dựa trên tiêu chí tìm kiếm
+--    SELECT @FilterCount = COUNT(*)
+--        FROM SanPham 
+--        WHERE (@Search IS NULL OR TenSanPham LIKE '%' + @Search + '%' OR GiaBan LIKE '%' + @Search + '%' OR MoTa LIKE '%' + @Search + '%' OR ChiTietSanPham LIKE '%' + @Search + '%');
+
+--    -- Nhận các bản ghi được phân trang dựa trên các giá trị bù và tìm nạp
+--    SELECT * 
+--        FROM SanPham 
+--        WHERE (@Search IS NULL OR TenSanPham LIKE '%' + @Search + '%' OR GiaBan LIKE '%' + @Search + '%' OR MoTa LIKE '%' + @Search + '%' OR ChiTietSanPham LIKE '%' + @Search + '%')
+--        ORDER BY MaSanPham 
+--        OFFSET @Offset ROWS FETCH NEXT @Fetch ROWS ONLY;
+--END;
+
+--exec TimKiem @page =1 , @PageSize=5,@Search = 45000
+
+----Thêm vào giỏ hàng
+--CREATE PROCEDURE AddToCart
+--	@MaKhachHang int,
+--	@NgayTao DateTime,
+--	@DiaChiNhan Nvarchar(250),
+--	@TrangThai int = 0,
+--	@MoTa Nvarchar(1000),
+--	@TongTien float =0
+--AS 
+--BEGIN 
+--	Insert into HoaDonBan(MaKhachHang,NgayTao,DiaChiNhan,TrangThai,MoTa,TongTien) 
+--	values (@MaKhachHang,@NgayTao,@DiaChiNhan,@TrangThai,@MoTa,@TongTien)
+--End
+
+----Thêm vào chi tiết đơn hàng
+--CREATE PROCEDURE ThemChiTietDonHang
+--	@masanpham int,
+--	@sl int,
+--	@tamtinh float
+--as
+--	begin 
+--	DECLARE @mahd int
+--	select top(1) @mahd = MaHoaDon
+--	from HoaDonBan
+--	order by MaHoaDon desc
+--	Insert into ChiTietHoaDonBan(MaSanPham,MaHoaDon,SoLuong,TamTinh) 
+--	values(@MaSanPham,@mahd,@sl,@tamtinh)
+--end
+
+--CREATE PROCEDURE Check_Login
+--	@tk nvarchar(500),
+--	@mk nvarchar(500)
+--AS
+--BEGIN 
+--	Select *
+--	from Nguoidung
+--	where username = @tk and password = @mk
+--END
+
+
+----Lấy loại sản phẩm theo mã loại
+--CREATE PROCEDURE get_product_categoryid
+--	@id int
+--as
+--begin
+--	select * 
+--	from sanpham
+--	where maloai = @id
+--end
+--exec AddToCart @MaKhachHang = 2, @NgayTao = '01-02-2021' , @SoLuong = 5, @MaSanPham = 5,@DiaChiNhan = "Hưng Yên",@MoTa = "Khách vip"
+
+------------------------------------------------Admin---------------------------------------------------
+
+----Người dùng
+----Lấy thông tin theo mã
+--Create Procedure GetUserById
+--	@Id int
+--AS
+--BEGIN
+--	Select * from nguoidung 
+--	Where MaNguoiDung = @Id;
+--END
+
+--exec GetUserById @Id = 5
+
+----Lấy tất cả danh sách người dùng
+--Create Procedure GetAllUsers
+--AS
+--BEGIN
+--	Select * from NguoiDung 
+--END
+
+--exec GetAllUsers
+
+----Thêm thông tin người dùng mới
+--Create Procedure AddUser
+--	@name Nvarchar(300),
+--	@username nvarchar(300),
+--	@password nvarchar(300),
+--	@ngaytao datetime,
+--	@dienthoai nvarchar(10),
+--	@anh Nvarchar(300),
+--	@diachi nvarchar(300),
+--	@trangthai bit
+--AS
+--BEGIN 
+--	INSERT INTO NguoiDung(HoTen,Anh,UserName,PassWord,NgayTao,DienThoai,DiaChi,TrangThai) Values(@name,@anh,@username,@password,@ngaytao,@dienthoai,@diachi,@trangthai);
+--END
+
+--exec AddUser @name = 'a', @username = 'a' , @password = 'a', @dienthoai = '1',@anh='a',@diachi='a',@trangthai = 'a'
+
+--select *
+--from sanpham
+
+----Sửa thông tin người dùng
+--Create Procedure suanguoidung
+--	@Ma int, 
+--	@name Nvarchar(300),
+--	@username nvarchar(300),
+--	@password nvarchar(300),
+--	@ngaytao datetime,
+--	@dienthoai nvarchar(10),
+--	@anh Nvarchar(300),
+--	@diachi nvarchar(300),
+--	@trangthai bit
+--AS 
+--	BEGIN
+--		UPDATE NguoiDung
+--		SET 
+--			HoTen = @name,
+--			UserName = @username,
+--			Anh = @anh,
+--			PassWord = @password,
+--			NgayTao = @ngaytao,
+--			DienThoai = @dienthoai,
+--			DiaChi = @diachi,
+--			TrangThai = @trangthai
+--		Where @Ma = MaNguoiDung 
+--END
+
+----Xóa người dùng
+--CREATE Procedure xoanguoidung
+--	@Id int
+--AS
+--BEGIN
+--	DELETE NguoiDung
+--	where MaNguoiDung = @Id
+--END
+
+-------Bảng loại sản phẩm
+--create Procedure GetCateById
+--	@Id int
+--AS
+--BEGIN
+--	Select * from LoaiSanPham 
+--	Where MaLoai = @Id;
+--END
+
+--exec GetUserById @Id = 5
+
+----Lấy tất cả loại sản phẩm
+--CREATE PROCEDURE get_all_data_category
+--as
+--begin
+--	select *
+--	from loaisanpham
+--end
+
+
+----Thêm loại sản phẩm mới
+--Create Procedure AddCategory
+--	@tenloai Nvarchar(300),
+--	@mota nvarchar(1000)
+--AS
+--BEGIN 
+--	INSERT INTO LoaiSanPham(TenLoai,MoTa) Values(@tenloai,@mota);
+--END
+
+ 
+
+----Sửa thông tin loại
+--Create Procedure sualoaisanpham
+--	@Ma int, 
+--	@tenloai Nvarchar(300),
+--	@mota nvarchar(1000)
+	
+--AS 
+--	BEGIN
+--		UPDATE LoaiSanPham
+--		SET 
+--			Tenloai = @tenloai,
+--			MoTa = @mota
+			
+--		Where MaLoai = @Ma 
+--END
+
+----Xóa loại sản phẩm
+--CREATE Procedure xoaloaisanpham
+--	@Id int
+--AS
+--BEGIN
+--	DELETE LoaiSanPham
+--	where MaLoai = @Id
+--END
+
+-------Bảng nhà cung cấp
+----Lấy thông tin nhà cung cấp theo mã
+--create Procedure GetSupById
+--	@Id int
+--AS
+--BEGIN
+--	Select * from NhaCungCap 
+--	Where MaNhaCungCap = @Id;
+--END
+
+
+----Lấy tất cả nhà cung cấp
+--CREATE PROCEDURE getallsup
+--as
+--begin
+--	select *
+--	from NhaCungCap
+--end
+
+
+----Thêm nhà cung cấp mới
+--Create Procedure AddSup
+--	@hoten Nvarchar(300),
+--	@diachi nvarchar(300),
+--	@dienthoai nvarchar(10),
+--	@email nvarchar(300)
+--AS
+--BEGIN 
+--	INSERT INTO NhaCungCap(HoTen,DiaChi,DienThoai,Email) Values(@hoten,@diachi,@dienthoai,@email);
+--END
+
+----Sửa thông tin nhà cung cấp
+--Create Procedure suanhacungcap
+--	@Ma int, 
+--	@hoten Nvarchar(300),
+--	@diachi nvarchar(300),
+--	@dienthoai nvarchar(10),
+--	@email nvarchar(300)
+	
+--AS 
+--	BEGIN
+--		UPDATE NhaCungCap
+--		SET 
+--			HoTen = @hoten,
+--			DiaChi = @diachi,
+--			DienThoai = @dienthoai,
+--			Email = @email
+--		Where MaNhaCungCap = @Ma 
+--END
+
+----Xóa nhà cung cấp
+--CREATE Procedure xoanhacungcap
+--	@Id int
+--AS
+--BEGIN
+--	DELETE NhaCungCap
+--	where MaNhaCungCap = @Id
+--END
+
+------------Bảng hóa đơn nhập
+----Lấy thông tin hóa đơn nhập theo mã
+--create Procedure GetInputBillId
+--	@Id int
+--AS
+--BEGIN
+--	Select * from HoaDonNhap 
+--	Where MaHoaDonNhap = @Id;
+--END
+
+
+----Lấy tất cả hóa đơn nhập
+--CREATE PROCEDURE getallinputbill
+--as
+--begin
+--	select *
+--	from HoaDonNhap hd inner join NguoiDung nd on hd.MaNguoiDung = nd.MaNguoiDung
+--	inner join NhaCungCap nc on hd.MaNhaCungCap = nc.MaNhaCungCap
+--end
+
+--exec getallinputbill
+
+----Lấy tất cả thông tin chi tiết hóa đơn nhập theo id
+--CREATE PROCEDURE get_all_detail_input_bill_id
+--	@id int
+--as
+--begin
+--	select *
+--	from ChiTietHoaDonNhap 
+--	where MaHoaDonNhap = @id 
+--end
+
+----Thêm hóa đơn nhập mới
+--Create Procedure AddInputBill
+--	@mancc int,
+--	@manguoidung int,
+--	@ngaynhap datetime
+--AS
+--BEGIN 
+--	INSERT INTO HoaDonNhap(MaNhaCungCap,MaNguoiDung,NgayNhap) Values(@mancc,@manguoidung,@ngaynhap);
+--END
+
+----Thêm chi tiết hóa đơn nhập
+--Create Procedure AddDetailInputBill
+--	@mahdn int,
+--	@masp int,
+--	@sl int,
+--	@gia float
+--AS
+--BEGIN 
+--	INSERT INTO ChiTietHoaDonNhap(MaHoaDonNhap,MaSanPham,SoLuong,GiaNhap) 
+--	Values(@mahdn,@masp,@sl,@gia);
+--END
+
+----Sửa thông tin hóa đơn nhập
+--Create Procedure suahoadonnhap
+--	@Ma int, 
+--	@mancc int,
+--	@manguoidung int,
+--	@ngaynhap datetime
+	
+--AS 
+--	BEGIN
+--		UPDATE HoaDonNhap
+--		SET 
+--			MaNhaCungCap = @mancc,
+--			MaNguoiDung = @manguoidung,
+--			NgayNhap = @ngaynhap
+--		Where MaHoaDonNhap = @Ma 
+--END
+
+----Xóa hóa đơn nhập
+--CREATE Procedure xoahoadonnhap
+--	@Id int
+--AS
+--BEGIN
+--	DELETE HoaDonNhap
+--	where MaHoaDonNhap = @Id
+--END
+
+----------Bảng khách hàng
+--create proc themkhachhang
+--	@username nvarchar(500),
+--	@password nvarchar(500),
+--	@hoten nvarchar(500),
+--	@diachi nvarchar(500),
+--	@sdt nvarchar(10),
+--	@email nvarchar(300)
+--as
+--begin 
+--	INSERT INTO KhachHang(UserName,PassWord,HoVaTen,DiaChi,SoDienThoai,Email) 
+--	Values(@username,@password,@hoten,@diachi,@sdt,@email)
+--end
+
+--create proc getdatacusid
+--	@id int
+--as
+--begin
+--	Select *
+--	from KhachHang
+--	where MaKhachHang = @id
+--end
+
+--create proc checklogin
+--	@tk nvarchar(200),
+--	@mk nvarchar(300)
+--as
+--	begin
+--		select *
+--		from KhachHang 
+--		where UserName = @tk and PassWord = @mk
+--	end
+
+--	exec checklogin @tk = 'hoang211', @mk = '123'
+
+--	--Bảng hóa đơn bán
+--CREATE PROCEDURE getallbill
+--as
+--begin
+--	select *
+--	from HoaDonBan hd inner join KhachHang kh on hd.MaKhachHang = kh.MaKhachHang
+--end
+----Lấy tất cả thông tin chi tiết sản phẩm theo mã hóa đơn bán 
+--CREATE PROCEDURE get_all_detail_output_bill_id
+--	@id int
+--as
+--begin
+--	select *
+--	from ChiTietHoaDonBan ct inner join SanPham sp on ct.MaSanPham = sp.MaSanPham
+--	where ct.MaHoaDon = @id 
+--end
+
+--exec get_all_detail_output_bill_id @id = 14
+
+----Xóa hóa đơn nhập
+--CREATE Procedure xoahoadonban
+--	@Id int
+--AS
+--BEGIN
+--	DELETE HoaDonBan
+--	where MaHoaDon = @Id
+--END
+
+----Sửa hóa đơn bán--
+--Create Procedure suahoadonban
+--	@MaHoaDon int, 
+--	@MaKhachHang int,
+--	@NgayTao datetime,
+--	@DiaChiNhan nvarchar(50),
+--	@TrangThai int,
+--	@MoTa nvarchar(300),
+--	@TongTien float
+	
+--AS 
+--	BEGIN
+--		UPDATE HoaDonBan
+--		SET 
+--			MaKhachHang = @MaKhachHang,
+--			NgayTao = @NgayTao,
+--			DiaChiNhan = @DiaChiNhan,
+--			TrangThai = @TrangThai,
+--			MoTa = @MoTa,
+--			TongTien =@TongTien
+--		Where MaHoaDon = @MaHoaDon 
+--END
  --select * from KHACHHANG
 
 -- INSERT INTO KHACHHANG VALUES('KH1',N'VƯƠNG ĐỨC TUẤN','0135451251',N'CẨM GIÀNG-HẢII DƯƠNG','vuongductuan@gmail.com')
