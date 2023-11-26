@@ -18,5 +18,10 @@ namespace BusinessLogicLayer
         {
             return _res.GetDanhSachDanhMuc();
         }
+        public List<ChiTietDanhMucModel> GetDanhSachChiTietDanhMuc()
+        {
+            return _res.GetDanhSachChiTietDanhMuc();
+        }
+
     }
 }

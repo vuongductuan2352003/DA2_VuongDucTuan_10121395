@@ -31,10 +31,16 @@ namespace DataAccessLayer
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_hoadon_create",
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "THEM_HOA_DON",
+                "@NgayTao",DateTime.Now,
+                "@NgayDuyet", DateTime.Now,
+                  "@TongGia", model.TongGia,
+                "@Id", model.Id,
                 "@TenKH", model.TenKH,
-                "@Diachi", model.Diachi,
-                "@TrangThai", model.TrangThai,
+                 "@GioiTinh", model.GioiTinh,
+                  "@DiaChi", model.DiaChi,
+                    "@SDT", model.SDT,
+                      "@Email", model.Email,
                 "@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
@@ -53,10 +59,15 @@ namespace DataAccessLayer
             try
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_hoa_don_update",
-                "@MaHoaDon", model.MaHoaDon,
+                "@NgayTao", DateTime.Now,
+                "@NgayDuyet", DateTime.Now,
+                  "@TongGia", model.TongGia,
+                "@Id", model.Id,
                 "@TenKH", model.TenKH,
-                "@Diachi", model.Diachi,
-                "@TrangThai", model.TrangThai,
+                 "@GioiTinh", model.GioiTinh,
+                  "@DiaChi", model.DiaChi,
+                    "@SDT", model.SDT,
+                      "@Email", model.Email,
                 "@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {

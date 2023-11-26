@@ -10,5 +10,6 @@ namespace BusinessLogicLayer
     public partial interface IDanhMucBusiness
     {
         public List<DanhMucModel> GetDanhSachDanhMuc();
+        public List<ChiTietDanhMucModel> GetDanhSachChiTietDanhMuc();
     }
 }

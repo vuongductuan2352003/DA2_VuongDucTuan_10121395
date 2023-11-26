@@ -26,5 +26,22 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
+        public List<ChiTietDanhMucModel> GetDanhSachChiTietDanhMuc()
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "GetDanhSachChiTietDanhMuc");
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+
+                List<ChiTietDanhMucModel> CTDanhMucList = dt.ConvertTo<ChiTietDanhMucModel>().ToList();
+                return CTDanhMucList.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace DataAccessLayer
     public partial interface IDanhMucRepository
     {
         List<DanhMucModel> GetDanhSachDanhMuc();
+        List<ChiTietDanhMucModel> GetDanhSachChiTietDanhMuc();
     }
 }

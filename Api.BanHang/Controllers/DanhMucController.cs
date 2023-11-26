@@ -20,5 +20,11 @@ namespace Api.DoGoMyNghe.Controllers
         {
             return _danhMucBusiness.GetDanhSachDanhMuc();
         }
+        [Route("get-listChiTietDanhMuc")]
+        [HttpGet]
+        public List<ChiTietDanhMucModel> GetDanhSachChiTietDanhMuc()
+        {
+            return _danhMucBusiness.GetDanhSachChiTietDanhMuc();
+        }
     }
 }

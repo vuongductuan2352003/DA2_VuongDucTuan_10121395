@@ -16,17 +16,12 @@ namespace Api.DoGoMyNghe.Controllers
         }
         [Route("get-by-id/{id}")]
         [HttpGet]
-        public SanPhamModel GetDatabyID(int id)
+        public SanPhamModel GetChiTietSanPham(int id)
         {
             return _sanPhamBusiness.GetChiTietSanPham(id);
         }
-        [Route("create-khachh")]
-        [HttpPost]
-        public ChiTietSanPhamModel CreateItem([FromBody] ChiTietSanPhamModel model)
-        {
-            _sanPhamBusiness.Create(model);
-            return model;
-        }
+      
+      
         [Route("create-sp")]
         [HttpPost]
         public SanPhamModel CreateItem(SanPhamModel model)
@@ -34,13 +29,32 @@ namespace Api.DoGoMyNghe.Controllers
             _sanPhamBusiness.Create(model);
             return model;
         }
-        [Route("update-khach")]
+        [Route("update-sanpham")]
         [HttpPost]
         public SanPhamModel UpdateItem([FromBody] SanPhamModel model)
         {
             _sanPhamBusiness.Update(model);
             return model;
         }
+        [Route("delete-san-pham")]
+        [HttpPost]
+        public bool DeleteItem([FromBody] int maSanPham)
+        {
+            try
+            {
+                // Call your repository or business logic to delete the product
+                bool result = _sanPhamBusiness.Delete(maSanPham);
+
+                // Return the result
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions or log errors if needed
+                throw ex;
+            }
+        }
+
 
         [Route("get-listSanPham")]
             [HttpGet]
@@ -48,6 +62,13 @@ namespace Api.DoGoMyNghe.Controllers
             {
                 return _sanPhamBusiness.GetDanhSachSanPham();
             }
-        
+        [Route("get-listChiTietSanPham")]
+        [HttpGet]
+        public List<ChiTietSanPhamModel> GetDanhSachChiTietSanPham()
+        {
+            return _sanPhamBusiness.GetDanhSachChiTietSanPham();
+        }
+
+
     }
 }

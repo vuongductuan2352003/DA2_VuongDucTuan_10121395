@@ -13,7 +13,7 @@ namespace DataModel
         public string TenSanPham { get; set; }
         public string AnhDaiDien { get; set; }        
         public decimal Gia { get; set; }
-
+        public int SoLuong { get; set; }
         public string NhaSanXuat { get; set; }
 
         public string BaoHanh { get; set; }
@@ -24,8 +24,9 @@ namespace DataModel
         public int MaChiTietSanPham { get; set; }
         public int MaChiTietDanhMuc { get; set; }
         public int MaSanPham { get; set; }
-        public int SoLuong { get; set; }
+        
         public string MoTa { get; set; }
+    
 
     }
 }

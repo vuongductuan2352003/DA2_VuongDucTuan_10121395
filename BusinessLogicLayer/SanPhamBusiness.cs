@@ -11,15 +11,13 @@ namespace BusinessLogicLayer
         public SanPhamBusiness(ISanPhamRepository res)
         {
             _res = res;
-        } 
+        }
         public SanPhamModel GetChiTietSanPham(int id)
+
         {
             return _res.GetChiTietSanPham(id);
         }
-        public bool Create(ChiTietSanPhamModel model)
-        {
-            return _res.Create(model);
-        }
+      
         public  bool Create(SanPhamModel model)
         {
             return _res.Create(model);
@@ -31,6 +29,14 @@ namespace BusinessLogicLayer
         public List<SanPhamModel> GetDanhSachSanPham()
         {
             return _res.GetDanhSachSanPham();
+        }
+        public bool Delete(int maSanPham)
+        {
+            return _res.Delete(maSanPham);
+        }
+        public List<ChiTietSanPhamModel> GetDanhSachChiTietSanPham()
+        {
+            return _res.GetDanhSachChiTietSanPham();
         }
     }
 }
