@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/GioHang/GioHang.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <title>Giỏ hàng</title>
+</head>
+<body ng-app="APIDOGOMYNGHE" ng-controller="GH">
+    <header>
+        <h1>Giỏ hàng</h1>
+    </header>
+
+<!-- Thêm các trường nhập thông tin khách hàng -->
+<section id="customer-info">
+    <h2>Thông tin khách hàng</h2>
+    <form id="customer-form">
+        <label for="customer-name">Tên khách hàng:</label>
+        <input type="text" id="customer-name" ng-model="tenKhachHang">
+
+        <label for="customer-email">Giới Tính:</label>
+        <input type="email" id="customer-email" ng-model="gioiTinh">
+        <label for="customer-address">Địa chỉ:</label>
+        <input id="customer-address" ng-model="diaChi" ></input>
+        <label for="customer-email">Điện Thoại:</label>
+        <input type="email" id="customer-email" ng-model="soDienThoai">
+
+        <label for="customer-address">Email:</label>
+        <input id="customer-address" ng-model="email"></input>
+    </form>
+</section>
+<!-- Thêm các trường thông tin sản phẩm, mã sản phẩm, ảnh đại diện, và số lượng vào giỏ hàng -->
+<section id="cart-items">
+    <h2>Giỏ hàng</h2>
+    <table>
+        <tr id="defaut">
+
+            <!-- Theo độ rộng của table content -->
+            <th  style="width: 5%" >STT</th>
+            <th  style="width: 5%" >Mã Giỏ Hàng </th>
+            <th  style="width: 5%" >Mã Sản Phẩm </th>
+            <th  style="width: 5%" >Mã Danh Mục</th>
+            <th  style="width: 15%">Tên </th>
+            <th  style="width: 10%">Giá </th>
+            <th  style="width: 5%" >Số Lượng</th>
+            <th  style="width: 5%" >Nhà Sản Xuất</th>
+            <th  style="width: 5%" >Bảo Hành</th>
+
+            <th style="width: 15%">Hành động</th>
+        </tr>
+    </table>
+    
+    <div class="menu-sanpham" >
+
+        <table>
+            
+            <tr ng-repeat="gh in ListGH"  >
+                <th  style="width: 5%" >{{$index + 1}}</th>
+                <th  style="width: 5%" >{{gh.maGioHang}}</th>
+                <th  style="width: 5%" >{{gh.maSanPham}}</th>
+                <th  style="width: 5%"> {{gh.maDanhMuc}}</th>
+                <th id="hienthi-img"  style="width: 15%" >{{gh.tenSanPham}} 
+                <img src="{{gh.anhDaiDien}}" alt="">
+                </th>
+                <th  style="width: 10%" >{{gh.gia | number:'0'}}đ</th>
+                <th  style="width: 5%" >{{gh.soLuong}}</th>
+                <th  style="width: 5%" >{{gh.nhaSanXuat}}</th>
+                
+                <th  style="width: 5%" >{{gh.baoHanh}}</th>
+                <th style="width: 15%">  <div>
+                    <input style="width: 120px;" type="text" ng-model="soLuong" ng-init="soLuong='Sửa Số Lượng'">
+                  <button><i class="fa fa-wrench" ng-click="pushdata(gh.maGioHang)"></i> </button>
+                <button ng-click="Xoa(gh.maGioHang)">  <i class="fa fa-trash"></i></button>
+                </div></th>
+      
+            </tr>
+        </table>
+      </div>
+      
+    <!-- Danh sách sản phẩm trong giỏ hàng sẽ được thêm vào đây -->
+</section>
+
+<section id="cart-total" ng-repeat="tt in ListTT" >
+    <h2>Tổng cộng: {{tt.tongGia | number:'0'}} đ</h2>
+    <button id="checkout-btn" ng-click="THANHTOAN()">Thanh toán</button>
+</section>
+<script src="/Connection/Angular.min.js"></script>
+<script src="/Connection/Global.js"></script>
+<script src="/Connection/Jquery-3.6.0.min.js"></script>
+<script src="/Connection/KB.js"></script>
+<script src="/Connection/GioHang.js"></script>
+    <script src="/GioHang/GioHang.js"></script>
+</body>
+</html>

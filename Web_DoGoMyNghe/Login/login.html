@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐỒ GỖ LÊ GIA - LOGIN</title>
+    <link rel="shortcut icon" href="https://dogolegia.vn/wp-content/uploads/2022/09/cropped-lg-favicon-192x192.png"
+        type="image/x-icon">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body ng-ap="APIDOGOMYNGHE" ng-controller="LoginController">
+    <div id="login">
+        <div id="logo">
+            <a href="/BaiTapLon/Trang_Chủ/index.html"><img id="img-logo" src="https://dogolegia.vn/wp-content/uploads/2022/09/LOGO-LE-GIA-01.png" alt="">
+
+            </a>
+            
+        </div>
+        <div id="login-signup">
+            <h2 class="background-lg-sg" style="text-align:center;float:left;" id="login-2">LOGIN</h2>
+            <h2 class="background-lg-sg"  style="text-align:center;float:left;margin-left:30px" id="signup-2">SIGN UP</h2>
+        </div>     
+        <div id="login-1">
+
+            <div class="email">
+                <label for="email">Email Address</label>
+                <div class="sec-2" >
+
+                    <input type="email" id="username" name="username" required> 
+                </div>
+            </div>
+            <div class="password">
+                <label for="password">Password</label>
+                <div class="sec-2">
+
+                    <input class="pas" id="password" name="password" required>
+                    <ion-icon class="show-hide" name="eye-outline"></ion-icon>
+                </div>
+            </div>
+               
+            <button class="login" ng-click="login()" type="button"> Login </button>
+        </div>
+        <div id="signup-3">
+            <div class="email" style="height: 30px;margin-left:10px ">
+                <label for="username">User Name</label>
+                <div>
+
+                    <input type="name" name="name" ng-model="taikhoan" />
+                </div>
+            </div>
+            <div class="email" style="height: 30px;margin-left:10px ">
+                <label for="email">Email Address</label>
+                <div>
+
+                    <input type="email" name="email" placeholder="Username@gmail.com" />
+                </div>
+            </div>
+            <div class="email" style="height: 30px;margin-left:10px ">
+                <label for="email">Password</label>
+                <div class="sec-2">
+
+                    <input type="text" placeholder="Password" />
+                </div>
+            </div>
+            <button class="signup">Sign up</button>
+        </div>
+    </div>
+        <script src="login.js"></script>
+        <script src="/Connection/Angular.min.js"></script>
+        <script src="/Connection/Global.js"></script>
+        <script src="/Connection/Jquery-3.6.0.min.js"></script>
+        <script src="/Connection/KB.js"></script>
+        <script src="/Connection/Login.js"></script>
+        <script src="/data/TaiKhoan.js">    </script>
+</body>
+
+</html>

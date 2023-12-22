@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="/test/test.css">
+    <link rel="stylesheet" href="">
+</head>
+
+<body ng-app="APIDOGOMYNGHE" ng-controller="DM">
+
+    
+    
+  
+        <form >
+            <label for="username">Tên đăng nhập:</label>
+            <input type="text" id="username" name="username" ng-model="taikhoan">
+    
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" ng-model="matkhau">
+            <label for="userType">Loại người dùng:</label>
+            <select id="userType" name="userType" required>
+                <option value="admin">Admin</option>
+                <option value="nguoidung">Người dùng</option>
+            </select>
+    
+            <button type="submit" onclick="login()">Đăng Nhập</button>
+        </form>
+   
+
+
+        <div id="product-container"></div>
+
+<script src="/data/SanPham.js"     ></script>
+ 
+        <script src="/data/TaiKhoan.js"></script>
+    <script src="test.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+
+<table ng-controller="DM">
+    <tbody>
+        <tr>
+            <th colspan="2">Thêm Sản Phẩm</th>
+        </tr>
+        <tr>
+            <td >Category:</td>
+            <td>
+                <select ng-controller="DM"  ng-model="maDanhMuc" ng-change="onDanhMucChange(dm.maDanhMuc)" >
+                    <option ng-repeat="dm in ListDM"  value="{{dm.maDanhMuc}}">{{dm.tenDanhMuc}}</option>
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+            <td>Tên sản phẩm:</td>
+            <td><input type="text" ng-model="tenSanPham"></td>
+        </tr>
+        <tr>
+            <td>Ảnh Đại Diện:</td>
+            <td>
+                <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" ng-src="{{anhDaiDien}}">
+                <input type="file" accept="image/*" ng-model="anhDaiDien"
+                    onchange="capNhatAnhSanPham(this.files, 'anhDaiDienSanPhamThem')">
+            </td>
+        </tr>
+        <tr>
+            <td>Giá tiền:</td>
+            <td><input type="number" ng-model="gia"></td>
+        </tr>
+        <tr>
+            <td>Số lượng</td>
+            <td><input type="number" ng-model="soLuong"></td>
+        </tr>
+        <tr>
+            <td>Hãng:</td>
+            <td><input type="text" ng-model="nhaSanXuat"></td>
+        </tr>
+        <tr>
+            <td>bảo hành</td>
+            <td><input type="text" ng-model="baoHanh"></td>
+        </tr>
+        <tr>
+            <th colspan="2">Thêm chi tiết Sản Phẩm</th>
+        </tr>
+        
+        <tr ng-controller="mct_DM">
+            <td>Mã chi tiết danh mục</td>
+            <td>
+                <select ng-controller="mct_DM"  ng-model="maChiTietDanhMuc" >
+                    <option ng-repeat="mct in ListCTDM" value="">{{mct.maChiTietDanhMuc}}</option>
+                </select>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Mô Tả</td>
+            <td><input type="text" ng-model="moTa"></td>
+        </tr> -->
